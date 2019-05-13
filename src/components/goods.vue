@@ -1,5 +1,5 @@
 <template>
-  <div class="conten-users">
+  <div class="conten-goods">
     <!-- 面包屑导航 -->
     <el-row>
       <el-col :span="24">
@@ -21,7 +21,7 @@
       </el-col>
         <el-col :span="16">
         <div class="grid-content bg-purple">
-           <el-button >添加用户</el-button>
+           <el-button >添加商品</el-button>
           </el-input>
         </div>
       </el-col>
@@ -30,34 +30,34 @@
     <el-row>
      <el-col :span="24">
         
-             <el-table :data="userList" border style="width: 100%">
-            <el-table-column  type="index" label="#" width="30" align="center">
+             <el-table :data="goodsList" border style="width: 100%" >
+
+            <el-table-column  type="index" label="#" width="50" align="center">
             </el-table-column>
-            <el-table-column prop="username" label="姓名" width="180" align="center">
+
+            <el-table-column prop="goods_name" label="商品名称" width="500" align="center">
             </el-table-column>
-            <el-table-column prop="email" label="邮箱" width="330" align="center">
+
+            <el-table-column prop="goods_price" label="商品价格(元)" width="120" align="center">
             </el-table-column>
-            <el-table-column prop="mobile" label="电话" width="330" align="center">
+
+            <el-table-column prop="goods_weight" label="商品重量" width="100" align="center">
             </el-table-column>
-            <el-table-column prop="mg_state" label="用户状态" width="80" align="center">
-              <!-- 开关 -->
+
+            <el-table-column prop="add_time" label="创建时间" width="200" align="center">
               <template slot-scope="scope">
-                  <el-switch
-                v-model="scope.row.mg_state"
-                active-color="#13ce66"
-                inactive-color="#ff4949">
-              </el-switch>
+                {{scope.row.add_time | beautifyTiem}}
               </template>
-              
-            </el-table-column>
-            <el-table-column prop="eminl" label="操作" width="350" align="center">
+
+             </el-table-column>
+
+            <el-table-column  label="操作" width="350" align="center">
                <template slot-scope="scope">
               <!-- 编辑 -->
                <el-button type="primary" icon="el-icon-edit" size="small" circle></el-button>
                <!-- 删除 -->
                  <el-button type="danger" icon="el-icon-delete" size="small" circle></el-button>
-                 <!-- 选中 -->
-                <el-button type="success" icon="el-icon-check" size="small" circle></el-button>
+         
                </template>
             </el-table-column>
             </el-table>
@@ -65,7 +65,7 @@
       </el-col>
     </el-row>
     <!-- 分页 -->
-      <el-row>
+       <el-row>
      <el-col :span="24">
        <div class="grid-content bg-purple">
            <el-pagination
@@ -84,14 +84,14 @@
 </template>
 <script>
 export default {
-  name: "users",
+  name: "goods",
   data() {
     return {
       // 面包屑标题
-      title1: "用户管理",
-      title2: "用户列表",
+      title1: "商品管理",
+      title2: "商品列表",
       // 用户列表信息
-      userList:[],
+      goodsList:[],
       // 表格信息
         tableData:{
           // 查询参数
@@ -99,7 +99,7 @@ export default {
           // 当前页码
           pagenum:1,
           // 页容量
-          pagesize:5,
+          pagesize:10,
         } ,
         // 信息总条数
         total:10
@@ -107,29 +107,31 @@ export default {
   },
   methods: {
     // 封装函数
-  async getUser(){
-       let res = await this.$axios.get('users',{params: this.tableData})
+    async getGoods(){
+        let res = await this.$axios.get('goods',{params: this.tableData})
         // console.log( res );
         this.pagenum = res.data.data.pagenum;
         this.total = res.data.data.total;
-        this.userList = res.data.data.users;
+        this.goodsList = res.data.data.goods;
     },
     //  页容量事件
     pageSizeChange(size){
+        //  console.log( size );
       this.tableData.pagesize = size;
       this.tableData.pagenum = 1;
-       this.getUser();
+       this.getGoods();
     },
     // 页码事件
     pageIndexChange(num){
-      this.tableData.pagenum = num;
-      this.getUser()
+        //  console.log( num );
+        this.tableData.pagenum = num;
+      this.getGoods();
 
     }
   },
   created() {
       // 获取用户列表数据
-      this.getUser();
+      this.getGoods();
   },
 };
 </script>

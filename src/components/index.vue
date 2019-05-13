@@ -20,8 +20,8 @@
           </el-col>
         </el-row>
       </el-header>
-      <el-container>
-        <el-aside width="200px">
+      <el-container >
+        <el-aside width="200px" >
          
           <el-menu default-active="2" class="el-menu-vertical-demo" unique-opened router :collapse="isCollapse">
              <el-radio-group v-model="isCollapse" style="">
@@ -37,7 +37,7 @@
                 <el-menu-item
                   v-for="(it, i) in item.children"
                   :key="it.id"
-                  :index="'/index/'+it.path"
+                  :index="it.path"
                 >
                   <i class="el-icon-menu"></i>
                   <span slot="title">{{it.authName}}</span>
@@ -66,18 +66,12 @@ export default {
   created() {
     // 左侧菜单数据
     this.$axios.get("menus").then(res => {
-      console.log(res);
+      // console.log(res);
       this.menusList = res.data.data;
     });
   },
   //   方法
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
     //   退出事件
     loginOut() {
       //   删除token
@@ -105,11 +99,13 @@ export default {
       }
     }
     .el-aside {
-      background-color: #e9eef3;
+   
+      background-color: #ffffff;
       color: #333;
       text-align: left;
       line-height: 0;
-      
+     
+   
       .el-menu{
         overflow: hidden;
        
@@ -122,10 +118,10 @@ export default {
     .el-main {
       background-color: #e9eef3;
       color: #333;
-      text-align: center;
-      line-height: 160px;
+      padding:0 0 0 20px;
     }
   }
+  
 }
 </style>
 
