@@ -21,7 +21,7 @@
         <el-cascader
           expand-trigger="hover"
           :options="options"
-          v-model="selectedOptions2"
+         
           @change="handleChange"
           :props="props"
           :show-all-levels="false"

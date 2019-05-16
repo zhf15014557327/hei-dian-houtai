@@ -35,7 +35,7 @@ export default {
       rules: {
         username: [
           { required: true, message: "请输入用户名", trigger: "change" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "change" }
+          { min: 2, max: 10, message: "长度在 2 到 10 个字符", trigger: "change" }
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "change" },
@@ -53,20 +53,25 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          // 验证成功发送登录请求
-          this.$axios.post("login", this.FormData).then(res => {
-            // 登陆成功提示
-            this.$message({
-              message: "登录成功",
-              type: "success"
-            });
-            // 保存token
-            window.sessionStorage.setItem(
-              "token",
-              JSON.stringify(res.data.data.token)
-            );
-            // 登陆成功跳转
-            this.$router.push("/");
+            // 验证成功发送登录请求
+            this.$axios.post("login", this.FormData).then(res => {
+            // console.log( res);
+            if(res.data.meta.status === 200){
+                      // 登陆成功提示
+                  this.$message({
+                    message: res.data.meta.msg,
+                    type: "success"
+                  });
+                  // 保存token
+                  window.sessionStorage.setItem(
+                    "token",
+                    JSON.stringify(res.data.data.token)
+                  );
+                  // 登陆成功跳转
+                  this.$router.push("/");
+            }else{
+                  this.$message.error(res.data.meta.msg);
+            }
           });
         } else {
           // 验证失败
