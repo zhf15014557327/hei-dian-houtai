@@ -12,9 +12,9 @@
     <el-row  class="search">
         <el-col :span="8">
         <div class="grid-content bg-purple">
-          <el-input placeholder="请输入内容" v-model="tableData.query">
+          <el-input placeholder="请输入内容" v-model="tableData.query" >
             <template slot="append">
-              <i class="el-icon-search" ></i>
+              <i class="el-icon-search" @click="goodsSearch"></i>
             </template>
           </el-input>
         </div>
@@ -54,9 +54,9 @@
             <el-table-column  label="操作" width="350" align="center">
                <template slot-scope="scope">
               <!-- 编辑 -->
-               <el-button type="primary" icon="el-icon-edit" size="small" circle></el-button>
+               <el-button type="primary" icon="el-icon-edit" size="small" circle @click="intoBianji(scope.row)"></el-button>
                <!-- 删除 -->
-                 <el-button type="danger" icon="el-icon-delete" size="small" circle></el-button>
+                 <el-button type="danger" icon="el-icon-delete" size="small" circle @click="dleGoods(scope.row)"></el-button>
          
                </template>
             </el-table-column>
@@ -80,6 +80,25 @@
        </div>
       </el-col>
     </el-row>
+    <!-- 编辑框 -->
+      <el-dialog title="编辑商品" :visible.sync="goodsVisible">
+      <el-form :model="goodsdata" label-position="right" :rules="rules" ref="goodsinfo">
+        <el-form-item label="商品名称" prop="attr_name" label-width="100px">
+          <el-input v-model="goodsdata.attr_name" autocomplete="off" placeholder="请输入商品名称"></el-input>
+        </el-form-item>
+        <el-form-item label="商品价格" prop="attr_vals" label-width="100px">
+          <el-input v-model="goodsdata.attr_vals" autocomplete="off" placeholder="请输入商品价格"></el-input>
+        </el-form-item>
+        <el-form-item label="商品重量" prop="attr_vals" label-width="100px">
+          <el-input v-model="goodsdata.attr_vals" autocomplete="off" placeholder="请输入商品重量"></el-input>
+        </el-form-item>
+      </el-form>
+
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="goodsVisible = false">取 消</el-button>
+        <el-button type="primary" @click="goodsubmint('goodsinfo')">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -102,7 +121,16 @@ export default {
           pagesize:10,
         } ,
         // 信息总条数
-        total:10
+        total:10,
+        // 编辑框信息
+        goodsdata:{},
+        // 编辑框状态
+        goodsVisible:false,
+        // 验证规则
+        rules:{
+
+        }
+
     };
   },
   methods: {
@@ -114,6 +142,7 @@ export default {
         this.total = res.data.data.total;
         this.goodsList = res.data.data.goods;
     },
+
     //  页容量事件
     pageSizeChange(size){
         //  console.log( size );
@@ -121,14 +150,65 @@ export default {
       this.tableData.pagenum = 1;
        this.getGoods();
     },
+
     // 页码事件
     pageIndexChange(num){
         //  console.log( num );
         this.tableData.pagenum = num;
       this.getGoods();
+    },
 
-    }
+  // 搜索商品
+  goodsSearch(){
+      this.getGoods();
   },
+
+  // 删除商品
+   dleGoods(data){
+      // console.log( data );
+        
+      this.$confirm("此操作将永久删除该商品, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(async () => {
+          // 删除请求
+             let res = await this.$axios.delete(`goods/${data.goods_id}`);
+                // console.log( res );
+
+          if (res.data.meta.status == 200) {
+            this.$message({
+              message: res.data.meta.msg,
+              type: "success"
+            });
+               this.getGoods();
+          } else {
+            this.$message.error("删除失败");
+          }
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
+   },
+   
+  //  进入编辑商品
+  intoBianji(goodsInof){
+    console.log(goodsInof  );
+  // 打开编辑框
+  this.goodsVisible = true;
+
+
+  },
+  // 提交编辑数据
+  postBianji(){
+
+  }
+  },
+
   created() {
       // 获取用户列表数据
       this.getGoods();
