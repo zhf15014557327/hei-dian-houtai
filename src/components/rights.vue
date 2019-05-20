@@ -1,5 +1,6 @@
 <template>
   <div class="conten-rights">
+       
     <!-- 面包屑导航 -->
     <el-row>
       <el-col :span="24">
@@ -36,6 +37,8 @@
         </el-table>
       </el-col>
     </el-row>
+     <!-- 返回顶内部 -->
+  
   </div>
 </template>
 <script>
@@ -51,9 +54,7 @@ export default {
      
     };
   },
-  methods: {
-  
-  },
+ 
  async created() {
       // 获取角色列表数据
   let res= await this.$axios.get('rights/list');

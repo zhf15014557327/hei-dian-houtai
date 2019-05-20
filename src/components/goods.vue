@@ -21,7 +21,9 @@
       </el-col>
         <el-col :span="16">
         <div class="grid-content bg-purple">
+          <router-link to="/addgoods">
            <el-button >添加商品</el-button>
+           </router-link>
           </el-input>
         </div>
       </el-col>
@@ -81,24 +83,30 @@
       </el-col>
     </el-row>
     <!-- 编辑框 -->
-      <el-dialog title="编辑商品" :visible.sync="goodsVisible">
-      <el-form :model="goodsdata" label-position="right" :rules="rules" ref="goodsinfo">
-        <el-form-item label="商品名称" prop="attr_name" label-width="100px">
-          <el-input v-model="goodsdata.attr_name" autocomplete="off" placeholder="请输入商品名称"></el-input>
+    <el-dialog title="编辑商品" :visible.sync="goodsVisible">
+      <el-form :model="goodsdata" label-position="right" >
+        <el-form-item label="商品名称"  label-width="100px">
+          <el-input v-model="goodsdata.goods_name" autocomplete="off" placeholder="请输入商品名称"></el-input>
         </el-form-item>
-        <el-form-item label="商品价格" prop="attr_vals" label-width="100px">
-          <el-input v-model="goodsdata.attr_vals" autocomplete="off" placeholder="请输入商品价格"></el-input>
+        <el-form-item label="商品价格"  label-width="100px">
+          <el-input v-model="goodsdata.goods_price" autocomplete="off" placeholder="请输入商品价格"></el-input>
         </el-form-item>
-        <el-form-item label="商品重量" prop="attr_vals" label-width="100px">
-          <el-input v-model="goodsdata.attr_vals" autocomplete="off" placeholder="请输入商品重量"></el-input>
+        <el-form-item label="商品数量"  label-width="100px">
+          <!-- <el-input v-model="goodsdata.goods_number" autocomplete="off" placeholder="请输入商品数量"></el-input> -->
+           <el-input-number v-model="goodsdata.goods_number" size="small" :min="1" :max="100" label="描述文字"></el-input-number>
+        </el-form-item>
+        <el-form-item label="商品重量"  label-width="100px">
+          <!-- <el-input v-model="goodsdata.goods_weight" autocomplete="off" placeholder="请输入商品重量"></el-input> -->
+           <el-input-number v-model="goodsdata.goods_weight" :min="1" size="small" :max="100" label="描述文字"></el-input-number>
         </el-form-item>
       </el-form>
 
       <div slot="footer" class="dialog-footer">
         <el-button @click="goodsVisible = false">取 消</el-button>
-        <el-button type="primary" @click="goodsubmint('goodsinfo')">确 定</el-button>
+        <el-button type="primary" @click="postBianji">确 定</el-button>
       </div>
     </el-dialog>
+    
   </div>
 </template>
 <script>
@@ -126,10 +134,7 @@ export default {
         goodsdata:{},
         // 编辑框状态
         goodsVisible:false,
-        // 验证规则
-        rules:{
-
-        }
+      
 
     };
   },
@@ -196,16 +201,36 @@ export default {
    },
    
   //  进入编辑商品
-  intoBianji(goodsInof){
-    console.log(goodsInof  );
+  async intoBianji(goodsInof){
+    // console.log(goodsInof  );
   // 打开编辑框
   this.goodsVisible = true;
-
-
+  let res = await this.$axios.get( `goods/${goodsInof.goods_id}`);
+  // console.log( res );
+  if(res.data.meta.status == 200){
+    this.goodsdata = res.data.data
+  }
   },
   // 提交编辑数据
-  postBianji(){
-
+  async postBianji(){
+    console.log(this.goodsdata );
+      // 准备数据
+      let setdata ={
+                goods_name:this.goodsdata.goods_name,
+                goods_price:this.goodsdata.goods_price,
+                goods_number:this.goodsdata.goods_number,
+                goods_weight:this.goodsdata.goods_weight,
+                goods_introduce:this.goodsdata.goods_introduce,
+                pics:this.goodsdata.pics,
+                attrs:this.goodsdata.attrs
+      }
+      // 提交数据
+      let res = await this.$axios.put(`goods/${this.goodsdata.goods_id}`,this.goodsdata);
+      // console.log( res );
+      if(res.data.meta.status == 200){
+           this.goodsVisible = false
+           this.getGoods();
+      }
   }
   },
 

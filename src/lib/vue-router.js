@@ -29,6 +29,8 @@ import categories from "../components/categories.vue"
 import orders from "../components/orders.vue"
 // 数据统计
 import reports from "../components/reports.vue"
+// 添加商品
+import addgoods from "../components/myAddgoods.vue"
 
 // 创造一个路由对象
 let router = new VueRouter({
@@ -86,6 +88,11 @@ let router = new VueRouter({
                 {
                     path:"reports",
                     component:reports,
+                },
+                // 添加商品
+                {
+                    path:"addgoods",
+                    component:addgoods,
                 },
             ]
         },

@@ -81,6 +81,7 @@
        </div>
       </el-col>
     </el-row>
+      
       <!-- 添加用户对话框 -->
     <el-dialog title="添加用户" :visible.sync="visible" >
         <el-form :model="form" label-position= 'left'  label-width="80px" :rules="rules" ref="userForm">
