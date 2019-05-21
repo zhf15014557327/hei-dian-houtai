@@ -4,33 +4,33 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 // 插件按需导入
 import {Message} from 'element-ui';
-// // 注册一下
-// Vue.prototype.$message = Message;
+// 注册一下
 
 
-// 导入组件
+
+// 导入组件const Foo = () => import('./Foo.vue')
 // 登录
-import login from "../components/login.vue"
+const  login = () => import ("../components/login.vue")
 // 首页
-import index from "../components/index.vue"
+const  index = () => import ("../components/index.vue")
 // 用户列表
-import users from "../components/users.vue"
+const  users = () => import ("../components/users.vue")
 // 角色列表
-import roles from "../components/roles.vue"
+const  roles = () => import ("../components/roles.vue")
 // 权限列表
-import rights from "../components/rights.vue"
+const  rights = () => import ("../components/rights.vue")
 // 商品列表
-import goods from "../components/goods.vue"
+const  goods = () => import ("../components/goods.vue")
 // 分类参数
-import params from "../components/params.vue"
+const  params = () => import ("../components/params.vue")
 // 商品分类
-import categories from "../components/categories.vue"
+const  categories = () => import ("../components/categories.vue")
 // 订单列表
-import orders from "../components/orders.vue"
+const  orders = () => import ("../components/orders.vue")
 // 数据统计
-import reports from "../components/reports.vue"
+const  reports = () => import ("../components/reports.vue")
 // 添加商品
-import addgoods from "../components/myAddgoods.vue"
+const  addgoods = () => import ("../components/myAddgoods.vue")
 
 // 创造一个路由对象
 let router = new VueRouter({
