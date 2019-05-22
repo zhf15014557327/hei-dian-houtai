@@ -13,7 +13,7 @@ Vue.filter("beautifyTiem",(value)=>{
   Vue.component("mianbaoxu",mianbaoxu)
 // 导入element-ui
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+// import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
 // 导入axios

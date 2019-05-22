@@ -3,3 +3,27 @@
     margin: 0;
     padding: 0;
 }
+.ml{
+    margin-right: 20px;
+}
+.mr{
+    margin-right: 20px;
+}
+.mt{
+    margin-right: 20px;
+}
+.mb{
+    margin-right: 20px;
+}
+.pl{
+    padding-left: 20px;
+}
+.pr{
+    padding-left: 20px;
+}
+.pt{
+    padding-left: 20px;
+}
+.pb{
+    padding-left: 20px;
+}

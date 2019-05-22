@@ -9,28 +9,28 @@
       </el-col>
     </el-row>
     <!-- 表格 -->
-    <el-row>
+    <el-row class="mr">
       <el-col :span="24">
         <el-table :data="ordersList" border style="width: 100%">
           <el-table-column type="index" label="#" width="50" align="center"></el-table-column>
 
-          <el-table-column prop="order_number" label="订单编号" width="300" align="center"></el-table-column>
+          <el-table-column prop="order_number" label="订单编号" width="200" align="center"></el-table-column>
 
-          <el-table-column prop="order_price" label="订单价格" width="120" align="center"></el-table-column>
+          <el-table-column prop="order_price" label="订单价格" width="90" align="center"></el-table-column>
 
-          <el-table-column prop="pay_status" label="是否付款" width="100" align="center">
+          <el-table-column prop="pay_status" label="是否付款" width="80" align="center">
             <template slot-scope="scope">
               <el-button type="danger" size="mini" plain v-if="scope.row.pay_status == '0'">未付款</el-button>
               <el-button type="success" size="mini" plain v-if="scope.row.pay_status == '1'">已付款</el-button>
             </template>
           </el-table-column>
-          <el-table-column prop="is_send" label="是否发货" width="100" align="center"></el-table-column>
+          <el-table-column prop="is_send" label="是否发货" width="80" align="center"></el-table-column>
 
           <el-table-column prop="create_time" label="订单时间" width="200" align="center">
             <template slot-scope="scope">{{scope.row.create_time | beautifyTiem}}</template>
           </el-table-column>
 
-          <el-table-column label="操作" width="350" align="center">
+          <el-table-column label="操作"  align="center">
             <template slot-scope="scope">
               <!-- 编辑 -->
               <el-button

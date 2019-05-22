@@ -10,7 +10,7 @@
     </el-row>
 
       <!-- 警告 -->
-    <el-row>
+    <el-row class="mr">
       <el-col :span="24" class="margin">
         <div class="grid-content bg-purple-dark">
           <el-alert title="添加商品信息" type="warning" center></el-alert>
@@ -18,7 +18,7 @@
       </el-col>
     </el-row>
 
-    <el-steps
+    <el-steps 
       :space="200" align-center :active="activeTabName - 0" finish-status="success">
       <el-step title="基本信息"></el-step>
       <el-step title="商品参数"></el-step>
@@ -28,6 +28,7 @@
     </el-steps>
 
     <el-form
+    class="mr"
       :model="addForm"
       :rules="addFormRules"
       ref="addFormRef"

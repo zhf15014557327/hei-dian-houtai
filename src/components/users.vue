@@ -27,17 +27,17 @@
       </el-col>
     </el-row>
     <!-- 表格 -->
-    <el-row>
+    <el-row class="mr">
      <el-col :span="24">
         
              <el-table :data="userList" border style="width: 100%">
             <el-table-column  type="index" label="#" width="50" align="center">
             </el-table-column>
-            <el-table-column prop="username" label="姓名" width="180" align="center">
+            <el-table-column prop="username" label="姓名" width="100" align="center">
             </el-table-column>
-            <el-table-column prop="email" label="邮箱" width="330" align="center">
+            <el-table-column prop="email" label="邮箱" width="150" align="center">
             </el-table-column>
-            <el-table-column prop="mobile" label="电话" width="330" align="center">
+            <el-table-column prop="mobile" label="电话" width="150" align="center">
             </el-table-column>
             <el-table-column prop="mg_state" label="用户状态" width="80" align="center">
               <!-- 开关 -->
@@ -51,7 +51,7 @@
               </el-switch>
               </template>
             </el-table-column>
-            <el-table-column prop="eminl" label="操作" width="350" align="center">
+            <el-table-column prop="eminl" label="操作"  align="center">
                <template slot-scope="scope">
               <!-- 编辑 -->
                <el-button type="primary" icon="el-icon-edit" size="small" circle @click="bianJi(scope.row.id)"></el-button>

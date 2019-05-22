@@ -17,7 +17,7 @@
       </el-col>
     </el-row>
     <!-- 表格 -->
-    <el-row>
+    <el-row class="mr">
       <el-col :span="24">
         <el-table :data="categoriesList" border style="width: 100%">
           <!-- 树形控件 -->

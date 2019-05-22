@@ -1,7 +1,7 @@
 <template>
   <div class="conten-params">
     <!-- 面包屑导航 -->
-    <el-row>
+    <el-row >
       <el-col :span="24">
         <div class="grid-content bg-purple-dark">
           <mianbaoxu :title1="title1" :title2="title2"></mianbaoxu>
@@ -9,13 +9,13 @@
       </el-col>
     </el-row>
     <!-- 提示 -->
-    <el-row>
-      <el-col :span="24" class="padding">
+    <el-row class="mr">
+      <el-col :span="24" >
         <el-alert title="注意：只允许为第三级分类设置相关参数！" type="warning" show-icon></el-alert>
       </el-col>
     </el-row>
     <!-- 联级菜单 -->
-    <el-row>
+    <el-row >
       <el-col :span="24">
         <span class="cascader">请选择商品分类:</span>
         <el-cascader
@@ -29,7 +29,7 @@
       </el-col>
     </el-row>
     <!-- tob栏 -->
-    <el-row class="padding">
+    <el-row class="mr">
       <el-col :span="24">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="动态参数" name="many">
@@ -44,7 +44,7 @@
               </el-col>
             </el-row>
             <!-- 表格 -->
-            <el-row class="padding">
+            <el-row >
               <el-col :span="24">
                 <el-table :data="manyData" border style="width: 100%">
                   <!-- 展开的table -->
@@ -115,7 +115,7 @@
                   :disabled="btndisabled"
                 >添加静态参数</el-button>
               </el-col>
-            </el-row>
+            </el-row class="mr">
             <!-- 表格 -->
             <el-row class="padding">
               <el-col :span="24">

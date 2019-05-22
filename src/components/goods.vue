@@ -24,12 +24,13 @@
           <router-link to="/addgoods">
            <el-button >添加商品</el-button>
            </router-link>
+            <!-- <el-button >添加商品</el-button> -->
           </el-input>
         </div>
       </el-col>
     </el-row>
     <!-- 表格 -->
-    <el-row>
+    <el-row class="mr">
      <el-col :span="24">
         
              <el-table :data="goodsList" border style="width: 100%" >
@@ -37,13 +38,13 @@
             <el-table-column  type="index" label="#" width="50" align="center">
             </el-table-column>
 
-            <el-table-column prop="goods_name" label="商品名称" width="500" align="center">
+            <el-table-column prop="goods_name" label="商品名称" width="300" align="center">
             </el-table-column>
 
-            <el-table-column prop="goods_price" label="商品价格(元)" width="120" align="center">
+            <el-table-column prop="goods_price" label="商品价格(元)" width="100" align="center">
             </el-table-column>
 
-            <el-table-column prop="goods_weight" label="商品重量" width="100" align="center">
+            <el-table-column prop="goods_weight" label="商品重量" width="80" align="center">
             </el-table-column>
 
             <el-table-column prop="add_time" label="创建时间" width="200" align="center">
@@ -53,7 +54,7 @@
 
              </el-table-column>
 
-            <el-table-column  label="操作" width="350" align="center">
+            <el-table-column  label="操作" align="center">
                <template slot-scope="scope">
               <!-- 编辑 -->
                <el-button type="primary" icon="el-icon-edit" size="small" circle @click="intoBianji(scope.row)"></el-button>

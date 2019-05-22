@@ -19,7 +19,7 @@
       </el-col>
     </el-row>
     <!-- 表格 -->
-   <el-row>
+   <el-row class="mr">
       <el-col :span="24">
         <el-table :data="rightsList" style="width: 100%" border >
           <!-- 表格通过prop拿到属性 -->

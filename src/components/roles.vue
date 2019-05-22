@@ -18,9 +18,9 @@
       </el-col>
     </el-row>
     <!-- 表格 -->
-   <el-row>
+   <el-row class="mr">
       <el-col :span="24">
-        <el-table :data="rolesList" style="width: 100%" border >
+        <el-table :data="rolesList" style="width: 100%" border  >
           <!-- 展开的table -->
           <el-table-column type="expand">
             <!-- 模板 -->
